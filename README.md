@@ -2,6 +2,8 @@
 
 **Live Deployment:** https://koinx-reconciliation-engine.vercel.app/
 
+(It may take sometime to restart free deployed server if it goes to sleep)
+
 A high-performance, full-stack application designed to ingest, validate, and reconcile cryptocurrency transaction reports between users and exchanges. Built with a Node.js/Express backend and a Next.js/Tailwind v4 frontend.
 
 ## Tech Stack
