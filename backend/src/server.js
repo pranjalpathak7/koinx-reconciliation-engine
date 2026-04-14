@@ -18,7 +18,14 @@ connectDB();
 
 // Security and utility middlewares
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://your-frontend-vercel-url.com' 
+  ],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
 
 // Request logging middleware (Optional but great for debugging)

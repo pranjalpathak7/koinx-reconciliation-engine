@@ -11,6 +11,7 @@ import { Parser } from 'json2csv';
  */
 export const triggerReconciliation = async (req, res) => {
   try {
+    await Transaction.deleteMany({}); // Optional: Only use this once to wipe the old duplicates
     // 1. Check if files were uploaded via Multer
     if (!req.files || !req.files.userFile || !req.files.exchangeFile) {
       return res.status(400).json({ error: 'Both userFile and exchangeFile are required.' });
@@ -32,9 +33,8 @@ export const triggerReconciliation = async (req, res) => {
     });
 
     // 4. Ingest the files into the database
-    await ingestCsvFile(userFilePath, 'USER');
-    await ingestCsvFile(exchangeFilePath, 'EXCHANGE');
-
+    await ingestCsvFile(userFilePath, 'USER', run._id);
+    await ingestCsvFile(exchangeFilePath, 'EXCHANGE', run._id);
     // 5. Run the Engine
     const summary = await runReconciliationLogic(run._id, config);
 

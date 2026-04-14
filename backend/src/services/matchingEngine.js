@@ -10,9 +10,9 @@ export const runReconciliationLogic = async (runId, config) => {
   const qtyToleranceDecimal = quantityTolerancePct / 100;
 
   // 1. Fetch all valid transactions
-  const userTxs = await Transaction.find({ source: 'USER', isValid: true }).lean();
-  let exchangeTxs = await Transaction.find({ source: 'EXCHANGE', isValid: true }).lean();
-
+  const userTxs = await Transaction.find({ runId, source: 'USER', isValid: true }).lean();
+  let exchangeTxs = await Transaction.find({ runId, source: 'EXCHANGE', isValid: true }).lean();
+  
   const reportEntries = [];
   const summary = { matched: 0, conflicting: 0, unmatchedUser: 0, unmatchedExchange: 0 };
 

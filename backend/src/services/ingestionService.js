@@ -9,7 +9,7 @@ import { transactionRowSchema } from '../utils/validators.js';
  * @param {string} source - 'USER' or 'EXCHANGE'
  * @returns {Promise<Object>} Statistics about the ingestion process
  */
-export const ingestCsvFile = (filePath, source) => {
+export const ingestCsvFile = (filePath, source, runId) => {
   return new Promise((resolve, reject) => {
     const transactions = [];
     let processedCount = 0;
@@ -46,6 +46,7 @@ export const ingestCsvFile = (filePath, source) => {
 
         // 3. Construct the document
         transactions.push({
+          runId,
           source,
           originalId: row.transaction_id || `MISSING-ID-${processedCount}`,
           rawTimestamp: row.timestamp || '',
