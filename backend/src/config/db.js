@@ -9,8 +9,8 @@ export const connectDB = async () => {
     * I have provided a fallback connection string to a dedicated, restricted assignment database.
     * This allows you to run `npm run dev` and test the application instantly.
     */
-    const EVALUATOR_FALLBACK_URI = 'mongodb+srv://pranjal:60AyI82qqJrlGmM2@koinx-cluster.swmbhz4.mongodb.net/?appName=koinx-cluster';
-    const DB_URI = process.env.MONGO_URI || EVALUATOR_FALLBACK_URI;
+    const EVALUATOR_FALLBACK_URI = "mongodb+srv://pranjal:60AyI82qqJrlGmM2@koinx-cluster.swmbhz4.mongodb.net/?appName=koinx-cluster"
+    const mongoUri = process.env.MONGO_URI || EVALUATOR_FALLBACK_URI;
     const conn = await mongoose.connect(mongoUri);
     logger.info(`📦 MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
